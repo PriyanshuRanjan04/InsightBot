@@ -381,7 +381,8 @@ def chat_page():
 
     # Display chat messages
     for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
+        avatar = "🧑" if message["role"] == "user" else "🤖"
+        with st.chat_message(message["role"], avatar=avatar):
             st.markdown(message["content"])
 
     # Chat input
@@ -390,11 +391,11 @@ def chat_page():
         st.session_state.messages.append({"role": "user", "content": prompt})
 
         # Display user message
-        with st.chat_message("user"):
+        with st.chat_message("user", avatar="🧑"):
             st.markdown(prompt)
 
         # Generate and display bot response
-        with st.chat_message("assistant"):
+        with st.chat_message("assistant", avatar="🤖"):
             with st.spinner("Thinking..."):
                 context = ""
 
